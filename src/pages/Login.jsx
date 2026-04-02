@@ -224,7 +224,7 @@ export default function Login() {
 
         <div className="login-card">
           <div className="logo-wrap">
-            <img src="/logo.png" alt="NOS4" />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="NOS4" />
           </div>
 
           <p className="login-label">Acesso restrito — Painel Admin</p>
