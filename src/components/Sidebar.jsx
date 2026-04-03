@@ -50,17 +50,11 @@ export default function Sidebar() {
           z-index: 100;
           transition: transform 0.3s ease;
         }
-
         .sidebar-overlay { display: none; }
         .hamburger { display: none; }
-
         @media (max-width: 768px) {
-          .sidebar {
-            transform: translateX(-100%);
-          }
-          .sidebar.open {
-            transform: translateX(0);
-          }
+          .sidebar { transform: translateX(-100%); }
+          .sidebar.open { transform: translateX(0); }
           .sidebar-overlay {
             display: block;
             position: fixed;
@@ -102,6 +96,8 @@ export default function Sidebar() {
         <nav style={{ flex: 1, padding: '1.5rem 0' }}>
           {navLink('/dashboard', 'Dashboard', true)}
           {navLink('/dashboard/eventos', 'Eventos')}
+          {navLink('/dashboard/usuarios', 'Usuários')}
+          {navLink('/dashboard/trocar-senha', 'Trocar Senha')}
         </nav>
 
         <div style={{ padding: '1.5rem', borderTop: '1px solid rgba(245,168,0,0.15)' }}>
