@@ -51,23 +51,16 @@ export default function Sidebar() {
           transition: transform 0.3s ease;
         }
 
-        .sidebar-overlay {
-          display: none;
-        }
-
-        .hamburger {
-          display: none;
-        }
+        .sidebar-overlay { display: none; }
+        .hamburger { display: none; }
 
         @media (max-width: 768px) {
           .sidebar {
             transform: translateX(-100%);
           }
-
           .sidebar.open {
             transform: translateX(0);
           }
-
           .sidebar-overlay {
             display: block;
             position: fixed;
@@ -75,12 +68,11 @@ export default function Sidebar() {
             background: rgba(0,0,0,0.7);
             z-index: 99;
           }
-
           .hamburger {
             display: flex;
             position: fixed;
             top: 1rem;
-            left: 1rem;
+            right: 1rem;
             z-index: 101;
             background: #0d0d0d;
             border: 1px solid rgba(245,168,0,0.3);
@@ -91,27 +83,25 @@ export default function Sidebar() {
             justify-content: center;
             cursor: pointer;
             font-size: 1.2rem;
+            transform: none;
           }
         }
       `}</style>
 
-      {/* Botão hamburguer mobile */}
       <button className="hamburger" onClick={() => setOpen(!open)}>
         {open ? '✕' : '☰'}
       </button>
 
-      {/* Overlay escuro */}
       {open && <div className="sidebar-overlay" onClick={() => setOpen(false)} />}
 
-      {/* Sidebar */}
       <aside className={`sidebar ${open ? 'open' : ''}`}>
         <div style={{ padding: '1.5rem', borderBottom: '1px solid rgba(245,168,0,0.15)' }}>
-          <img src="/logo.png" alt="NOS4" style={{ width: '120px' }} />
+          <img src={`${import.meta.env.BASE_URL}logo.png`} alt="NOS4" style={{ width: '120px' }} />
         </div>
 
         <nav style={{ flex: 1, padding: '1.5rem 0' }}>
-          {navLink('/dashboard', '📊 Dashboard', true)}
-          {navLink('/dashboard/eventos', '🎉 Eventos')}
+          {navLink('/dashboard', 'Dashboard', true)}
+          {navLink('/dashboard/eventos', 'Eventos')}
         </nav>
 
         <div style={{ padding: '1.5rem', borderTop: '1px solid rgba(245,168,0,0.15)' }}>
