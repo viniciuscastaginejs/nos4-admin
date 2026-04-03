@@ -91,7 +91,7 @@ export default function Eventos() {
                       ● {statusLabel[ev.status]?.label || ev.status}
                     </span>
                   </div>
-                  <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
+                  <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0, flexWrap: 'wrap' }}>
                     <button
                       onClick={() => navigate(`/dashboard/eventos/editar/${ev.id}`)}
                       style={{ padding: '0.5rem 1rem', background: 'transparent', border: '1px solid rgba(245,168,0,0.4)', color: '#F5A800', cursor: 'pointer', fontSize: '0.8rem' }}
@@ -103,6 +103,12 @@ export default function Eventos() {
                       style={{ padding: '0.5rem 1rem', background: 'transparent', border: '1px solid rgba(239,68,68,0.4)', color: '#ef4444', cursor: 'pointer', fontSize: '0.8rem' }}
                     >
                       REMOVER
+                    </button>
+                    <button
+                      onClick={() => window.open(`https://nos4producoes.com.br/eventos/${ev.id}`, '_blank')}
+                      style={{ padding: '0.5rem 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontSize: '0.8rem' }}
+                    >
+                      VER NO SITE
                     </button>
                   </div>
                 </div>
