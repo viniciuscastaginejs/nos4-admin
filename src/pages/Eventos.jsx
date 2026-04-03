@@ -27,6 +27,15 @@ export default function Eventos() {
     fetchEventos()
   }
 
+  async function handleDuplicate(ev) {
+    const { id, created_at, ...rest } = ev
+    const { error } = await supabase.from('events').insert([{
+      ...rest,
+      title: `${ev.title} (cópia)`
+    }])
+    if (!error) fetchEventos()
+  }
+
   const statusLabel = {
     em_breve: { label: 'Em breve', color: '#888' },
     vendas_abertas: { label: 'Vendas abertas', color: '#22c55e' },
@@ -97,6 +106,12 @@ export default function Eventos() {
                       style={{ padding: '0.5rem 1rem', background: 'transparent', border: '1px solid rgba(245,168,0,0.4)', color: '#F5A800', cursor: 'pointer', fontSize: '0.8rem' }}
                     >
                       EDITAR
+                    </button>
+                    <button
+                      onClick={() => handleDuplicate(ev)}
+                      style={{ padding: '0.5rem 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.5)', cursor: 'pointer', fontSize: '0.8rem' }}
+                    >
+                      DUPLICAR
                     </button>
                     <button
                       onClick={() => handleDelete(ev.id)}
