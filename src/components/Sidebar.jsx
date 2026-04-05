@@ -1,10 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { supabase } from '../supabase'
 
 export default function Sidebar() {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [open])
 
   async function handleLogout() {
     await supabase.auth.signOut()
@@ -48,13 +57,8 @@ export default function Sidebar() {
           left: 0;
           z-index: 100;
           overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
           transition: transform 0.3s ease;
-        }
-
-        .main-wrap {
-          display: flex;
-          min-height: 100vh;
-          background: #080808;
         }
 
         .sidebar-overlay { display: none; }
@@ -63,7 +67,9 @@ export default function Sidebar() {
         @media (max-width: 768px) {
           .sidebar {
             transform: translateX(-100%);
-            width: 260px;
+            width: 75vw;
+            max-width: 280px;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.5);
           }
           .sidebar.open {
             transform: translateX(0);
@@ -74,6 +80,7 @@ export default function Sidebar() {
             inset: 0;
             background: rgba(0,0,0,0.7);
             z-index: 99;
+            -webkit-tap-highlight-color: transparent;
           }
           .hamburger {
             display: flex;
@@ -84,12 +91,14 @@ export default function Sidebar() {
             background: #0d0d0d;
             border: 1px solid rgba(245,168,0,0.3);
             color: #F5A800;
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            border-radius: 4px;
+            -webkit-tap-highlight-color: transparent;
           }
         }
       `}</style>
@@ -99,10 +108,7 @@ export default function Sidebar() {
       </button>
 
       {open && (
-        <div
-          className="sidebar-overlay"
-          onClick={() => setOpen(false)}
-        />
+        <div className="sidebar-overlay" onClick={() => setOpen(false)} />
       )}
 
       <aside className={`sidebar ${open ? 'open' : ''}`}>
@@ -125,7 +131,7 @@ export default function Sidebar() {
           <button
             onClick={handleLogout}
             style={{
-              width: '100%', padding: '0.6rem',
+              width: '100%', padding: '0.75rem',
               background: 'transparent',
               border: '1px solid rgba(245,168,0,0.3)',
               color: '#F5A800', cursor: 'pointer',
