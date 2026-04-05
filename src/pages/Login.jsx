@@ -1,18 +1,38 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../supabase'
 import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [remember, setRemember] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('nos4_email')
+    const savedPassword = localStorage.getItem('nos4_password')
+    if (savedEmail && savedPassword) {
+      setEmail(savedEmail)
+      setPassword(savedPassword)
+      setRemember(true)
+    }
+  }, [])
 
   async function handleLogin(e) {
     e.preventDefault()
     setLoading(true)
     setError('')
+
+    if (remember) {
+      localStorage.setItem('nos4_email', email)
+      localStorage.setItem('nos4_password', password)
+    } else {
+      localStorage.removeItem('nos4_email')
+      localStorage.removeItem('nos4_password')
+    }
+
     const { error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) {
       setError('E-mail ou senha incorretos.')
@@ -28,11 +48,7 @@ export default function Login() {
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap');
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html, body, #root {
-          height: 100%;
-          width: 100%;
-        }
+        html, body, #root { height: 100%; width: 100%; }
 
         .login-root {
           min-height: 100vh;
@@ -140,7 +156,7 @@ export default function Login() {
           display: flex;
           flex-direction: column;
           gap: 0.75rem;
-          margin-bottom: 1.25rem;
+          margin-bottom: 1rem;
         }
 
         .input-field {
@@ -161,6 +177,26 @@ export default function Login() {
         .input-field:focus {
           border-color: rgba(245,168,0,0.6);
           background: rgba(245,168,0,0.05);
+        }
+
+        .remember-wrap {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-bottom: 1.25rem;
+          cursor: pointer;
+        }
+
+        .remember-wrap input[type="checkbox"] {
+          width: 16px;
+          height: 16px;
+          accent-color: #F5A800;
+          cursor: pointer;
+        }
+
+        .remember-wrap span {
+          font-size: 0.8rem;
+          color: rgba(255,255,255,0.4);
         }
 
         .error-msg {
@@ -209,12 +245,8 @@ export default function Login() {
         }
 
         @media (max-width: 480px) {
-          .login-card {
-            padding: 2.5rem 1.5rem;
-          }
-          .logo-wrap img {
-            width: 160px;
-          }
+          .login-card { padding: 2.5rem 1.5rem; }
+          .logo-wrap img { width: 160px; }
         }
       `}</style>
 
@@ -248,6 +280,15 @@ export default function Login() {
                 required
               />
             </div>
+
+            <label className="remember-wrap">
+              <input
+                type="checkbox"
+                checked={remember}
+                onChange={e => setRemember(e.target.checked)}
+              />
+              <span>Lembrar meus dados</span>
+            </label>
 
             {error && <p className="error-msg">{error}</p>}
 
