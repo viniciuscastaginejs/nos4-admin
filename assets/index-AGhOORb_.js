@@ -223,7 +223,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
             width: 160px;
           }
         }
-      `}),(0,H.jsxs)(`div`,{className:`login-root`,children:[(0,H.jsx)(`div`,{className:`grid-overlay`}),(0,H.jsx)(`div`,{className:`glow-bottom`}),(0,H.jsxs)(`div`,{className:`login-card`,children:[(0,H.jsx)(`div`,{className:`logo-wrap`,children:(0,H.jsx)(`img`,{src:`/nos4-admin/logo.png`,alt:`NOS4`})}),(0,H.jsx)(`p`,{className:`login-label`,children:`Acesso restrito — Painel Admin`}),(0,H.jsxs)(`form`,{onSubmit:l,children:[(0,H.jsxs)(`div`,{className:`input-group`,children:[(0,H.jsx)(`input`,{className:`input-field`,type:`email`,placeholder:`E-mail`,value:e,onChange:e=>t(e.target.value),required:!0}),(0,H.jsx)(`input`,{className:`input-field`,type:`password`,placeholder:`Senha`,value:n,onChange:e=>r(e.target.value),required:!0})]}),o&&(0,H.jsx)(`p`,{className:`error-msg`,children:o}),(0,H.jsx)(`button`,{className:`btn-login`,type:`submit`,disabled:i,children:i?`ENTRANDO...`:`ENTRAR`})]}),(0,H.jsx)(`p`,{className:`footer-text`,children:`NOS4 Produções de Eventos`})]})]})]})}function Us(){let e=ut(),[t,n]=(0,_.useState)(!1);async function r(){await V.auth.signOut(),e(`/`)}let i=(e,t,r=!1)=>(0,H.jsx)(An,{to:e,end:r,onClick:()=>n(!1),style:({isActive:e})=>({display:`flex`,alignItems:`center`,padding:`0.85rem 1.5rem`,color:e?`#F5A800`:`rgba(255,255,255,0.5)`,textDecoration:`none`,fontSize:`0.9rem`,letterSpacing:`0.05em`,borderLeft:e?`2px solid #F5A800`:`2px solid transparent`,background:e?`rgba(245,168,0,0.05)`:`transparent`,transition:`all 0.2s`}),children:t});return(0,H.jsxs)(H.Fragment,{children:[(0,H.jsx)(`style`,{children:`
+      `}),(0,H.jsxs)(`div`,{className:`login-root`,children:[(0,H.jsx)(`div`,{className:`grid-overlay`}),(0,H.jsx)(`div`,{className:`glow-bottom`}),(0,H.jsxs)(`div`,{className:`login-card`,children:[(0,H.jsx)(`div`,{className:`logo-wrap`,children:(0,H.jsx)(`img`,{src:`/nos4-admin/logo.png`,alt:`NOS4`})}),(0,H.jsx)(`p`,{className:`login-label`,children:`Acesso restrito — Painel Admin`}),(0,H.jsxs)(`form`,{onSubmit:l,children:[(0,H.jsxs)(`div`,{className:`input-group`,children:[(0,H.jsx)(`input`,{className:`input-field`,type:`email`,placeholder:`E-mail`,value:e,onChange:e=>t(e.target.value),required:!0}),(0,H.jsx)(`input`,{className:`input-field`,type:`password`,placeholder:`Senha`,value:n,onChange:e=>r(e.target.value),required:!0})]}),o&&(0,H.jsx)(`p`,{className:`error-msg`,children:o}),(0,H.jsx)(`button`,{className:`btn-login`,type:`submit`,disabled:i,children:i?`ENTRANDO...`:`ENTRAR`})]}),(0,H.jsx)(`p`,{className:`footer-text`,children:`NOS4 Produções de Eventos`})]})]})]})}function Us(){let e=ut(),[t,n]=(0,_.useState)(!1);(0,_.useEffect)(()=>(t?document.body.style.overflow=`hidden`:document.body.style.overflow=``,()=>{document.body.style.overflow=``}),[t]);async function r(){await V.auth.signOut(),e(`/`)}let i=(e,t,r=!1)=>(0,H.jsx)(An,{to:e,end:r,onClick:()=>n(!1),style:({isActive:e})=>({display:`flex`,alignItems:`center`,padding:`0.85rem 1.5rem`,color:e?`#F5A800`:`rgba(255,255,255,0.5)`,textDecoration:`none`,fontSize:`0.9rem`,letterSpacing:`0.05em`,borderLeft:e?`2px solid #F5A800`:`2px solid transparent`,background:e?`rgba(245,168,0,0.05)`:`transparent`,transition:`all 0.2s`}),children:t});return(0,H.jsxs)(H.Fragment,{children:[(0,H.jsx)(`style`,{children:`
         .sidebar {
           width: 240px;
           height: 100vh;
@@ -236,13 +236,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           left: 0;
           z-index: 100;
           overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
           transition: transform 0.3s ease;
-        }
-
-        .main-wrap {
-          display: flex;
-          min-height: 100vh;
-          background: #080808;
         }
 
         .sidebar-overlay { display: none; }
@@ -251,7 +246,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         @media (max-width: 768px) {
           .sidebar {
             transform: translateX(-100%);
-            width: 260px;
+            width: 75vw;
+            max-width: 280px;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.5);
           }
           .sidebar.open {
             transform: translateX(0);
@@ -262,6 +259,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
             inset: 0;
             background: rgba(0,0,0,0.7);
             z-index: 99;
+            -webkit-tap-highlight-color: transparent;
           }
           .hamburger {
             display: flex;
@@ -272,15 +270,17 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
             background: #0d0d0d;
             border: 1px solid rgba(245,168,0,0.3);
             color: #F5A800;
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            border-radius: 4px;
+            -webkit-tap-highlight-color: transparent;
           }
         }
-      `}),(0,H.jsx)(`button`,{className:`hamburger`,onClick:()=>n(!t),children:t?`✕`:`☰`}),t&&(0,H.jsx)(`div`,{className:`sidebar-overlay`,onClick:()=>n(!1)}),(0,H.jsxs)(`aside`,{className:`sidebar ${t?`open`:``}`,children:[(0,H.jsx)(`div`,{style:{padding:`1.5rem`,borderBottom:`1px solid rgba(245,168,0,0.15)`,flexShrink:0},children:(0,H.jsx)(`img`,{src:`/nos4-admin/logo.png`,alt:`NOS4`,style:{width:`120px`}})}),(0,H.jsxs)(`nav`,{style:{flex:1,padding:`1rem 0`},children:[i(`/dashboard`,`Dashboard`,!0),i(`/dashboard/eventos`,`Eventos`),i(`/dashboard/usuarios`,`Usuários`),i(`/dashboard/trocar-senha`,`Trocar Senha`)]}),(0,H.jsx)(`div`,{style:{padding:`1.5rem`,borderTop:`1px solid rgba(245,168,0,0.15)`,flexShrink:0},children:(0,H.jsx)(`button`,{onClick:r,style:{width:`100%`,padding:`0.6rem`,background:`transparent`,border:`1px solid rgba(245,168,0,0.3)`,color:`#F5A800`,cursor:`pointer`,fontSize:`0.8rem`,letterSpacing:`0.15em`},children:`SAIR`})})]})]})}function Ws(){let[e,t]=(0,_.useState)({total:0,ativos:0,proximo:null});(0,_.useEffect)(()=>{n()},[]);async function n(){let{data:e}=await V.auth.getSession();console.log(`Session:`,e);let{data:n,error:r}=await V.from(`events`).select(`*`).order(`date`,{ascending:!0});if(console.log(`Events:`,n),console.log(`Error:`,r),!n)return;let i=new Date().toISOString().split(`T`)[0],a=n.filter(e=>e.status===`vendas_abertas`||e.status===`lista_vip`),o=n.filter(e=>e.date>=i);t({total:n.length,ativos:a.length,proximo:o[0]||null})}return(0,H.jsxs)(H.Fragment,{children:[(0,H.jsx)(`style`,{children:`
+      `}),(0,H.jsx)(`button`,{className:`hamburger`,onClick:()=>n(!t),children:t?`✕`:`☰`}),t&&(0,H.jsx)(`div`,{className:`sidebar-overlay`,onClick:()=>n(!1)}),(0,H.jsxs)(`aside`,{className:`sidebar ${t?`open`:``}`,children:[(0,H.jsx)(`div`,{style:{padding:`1.5rem`,borderBottom:`1px solid rgba(245,168,0,0.15)`,flexShrink:0},children:(0,H.jsx)(`img`,{src:`/nos4-admin/logo.png`,alt:`NOS4`,style:{width:`120px`}})}),(0,H.jsxs)(`nav`,{style:{flex:1,padding:`1rem 0`},children:[i(`/dashboard`,`Dashboard`,!0),i(`/dashboard/eventos`,`Eventos`),i(`/dashboard/usuarios`,`Usuários`),i(`/dashboard/trocar-senha`,`Trocar Senha`)]}),(0,H.jsx)(`div`,{style:{padding:`1.5rem`,borderTop:`1px solid rgba(245,168,0,0.15)`,flexShrink:0},children:(0,H.jsx)(`button`,{onClick:r,style:{width:`100%`,padding:`0.75rem`,background:`transparent`,border:`1px solid rgba(245,168,0,0.3)`,color:`#F5A800`,cursor:`pointer`,fontSize:`0.8rem`,letterSpacing:`0.15em`},children:`SAIR`})})]})]})}function Ws(){let[e,t]=(0,_.useState)({total:0,ativos:0,proximo:null});(0,_.useEffect)(()=>{n()},[]);async function n(){let{data:e}=await V.auth.getSession();console.log(`Session:`,e);let{data:n,error:r}=await V.from(`events`).select(`*`).order(`date`,{ascending:!0});if(console.log(`Events:`,n),console.log(`Error:`,r),!n)return;let i=new Date().toISOString().split(`T`)[0],a=n.filter(e=>e.status===`vendas_abertas`||e.status===`lista_vip`),o=n.filter(e=>e.date>=i);t({total:n.length,ativos:a.length,proximo:o[0]||null})}return(0,H.jsxs)(H.Fragment,{children:[(0,H.jsx)(`style`,{children:`
         .main-content {
           margin-left: 240px;
           flex: 1;
