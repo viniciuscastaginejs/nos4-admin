@@ -19,8 +19,7 @@ export default function Sidebar() {
       style={({ isActive }) => ({
         display: 'flex',
         alignItems: 'center',
-        gap: '10px',
-        padding: '0.75rem 1.5rem',
+        padding: '0.85rem 1.5rem',
         color: isActive ? '#F5A800' : 'rgba(255,255,255,0.5)',
         textDecoration: 'none',
         fontSize: '0.9rem',
@@ -39,7 +38,7 @@ export default function Sidebar() {
       <style>{`
         .sidebar {
           width: 240px;
-          min-height: 100vh;
+          height: 100vh;
           background: #0d0d0d;
           border-right: 1px solid rgba(245,168,0,0.15);
           display: flex;
@@ -48,13 +47,27 @@ export default function Sidebar() {
           top: 0;
           left: 0;
           z-index: 100;
+          overflow-y: auto;
           transition: transform 0.3s ease;
         }
+
+        .main-wrap {
+          display: flex;
+          min-height: 100vh;
+          background: #080808;
+        }
+
         .sidebar-overlay { display: none; }
         .hamburger { display: none; }
+
         @media (max-width: 768px) {
-          .sidebar { transform: translateX(-100%); }
-          .sidebar.open { transform: translateX(0); }
+          .sidebar {
+            transform: translateX(-100%);
+            width: 260px;
+          }
+          .sidebar.open {
+            transform: translateX(0);
+          }
           .sidebar-overlay {
             display: block;
             position: fixed;
@@ -77,7 +90,6 @@ export default function Sidebar() {
             justify-content: center;
             cursor: pointer;
             font-size: 1.2rem;
-            transform: none;
           }
         }
       `}</style>
@@ -86,21 +98,30 @@ export default function Sidebar() {
         {open ? '✕' : '☰'}
       </button>
 
-      {open && <div className="sidebar-overlay" onClick={() => setOpen(false)} />}
+      {open && (
+        <div
+          className="sidebar-overlay"
+          onClick={() => setOpen(false)}
+        />
+      )}
 
       <aside className={`sidebar ${open ? 'open' : ''}`}>
-        <div style={{ padding: '1.5rem', borderBottom: '1px solid rgba(245,168,0,0.15)' }}>
-          <img src={`${import.meta.env.BASE_URL}logo.png`} alt="NOS4" style={{ width: '120px' }} />
+        <div style={{ padding: '1.5rem', borderBottom: '1px solid rgba(245,168,0,0.15)', flexShrink: 0 }}>
+          <img
+            src={`${import.meta.env.BASE_URL}logo.png`}
+            alt="NOS4"
+            style={{ width: '120px' }}
+          />
         </div>
 
-        <nav style={{ flex: 1, padding: '1.5rem 0' }}>
+        <nav style={{ flex: 1, padding: '1rem 0' }}>
           {navLink('/dashboard', 'Dashboard', true)}
           {navLink('/dashboard/eventos', 'Eventos')}
           {navLink('/dashboard/usuarios', 'Usuários')}
           {navLink('/dashboard/trocar-senha', 'Trocar Senha')}
         </nav>
 
-        <div style={{ padding: '1.5rem', borderTop: '1px solid rgba(245,168,0,0.15)' }}>
+        <div style={{ padding: '1.5rem', borderTop: '1px solid rgba(245,168,0,0.15)', flexShrink: 0 }}>
           <button
             onClick={handleLogout}
             style={{
